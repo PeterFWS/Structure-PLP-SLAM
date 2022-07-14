@@ -1,0 +1,68 @@
+#/**
+# * This file is part of Structure PLP-SLAM.
+# *
+# * Copyright 2022 DFKI (German Research Center for Artificial Intelligence)
+# * Developed by Fangwen Shu <Fangwen.Shu@dfki.de>
+# *
+# * If you use this code, please cite the respective publications as
+# * listed on the github repository.
+# *
+# * Structure PLP-SLAM is free software: you can redistribute it and/or modify
+# * it under the terms of the GNU General Public License as published by
+# * the Free Software Foundation, either version 3 of the License, or
+# * (at your option) any later version.
+# *
+# * Structure PLP-SLAM is distributed in the hope that it will be useful,
+# * but WITHOUT ANY WARRANTY; without even the implied warranty of
+# * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# * GNU General Public License for more details.
+# *
+# * You should have received a copy of the GNU General Public License
+# * along with Structure PLP-SLAM. If not, see <http://www.gnu.org/licenses/>.
+# */
+
+#-------------------------- planar_mapping module -----------------------
+# If use graph-cut
+Threshold.use_graph_cut: true
+
+# If print debug info
+Threshold.setVerbose: false
+
+# If check 3x3 window around a pixel about semantic (label) color consistent
+Threshold.check_3x3_window: true
+
+# Sequential RANSAC parameters
+Threshold.min_number_points_before_ransac: 12
+Threshold.point_per_ransac: 12
+Threshold.iterationsCount: 50
+
+# User defined geometric threshold and inlier-outlier threshold
+# will updated by adaptive adjustment within SLAM
+Threshold.plane_distance_correction: 0.02 # used to check if a point is close enough to a plane
+Threshold.final_error_correction: 0.01 # the model residual used to stop RANSAC loop
+Threshold.inliers_ratio_thr: 0.7 # used to check if we have enough inlier in RANSAC
+
+# Adapted thresholds for merging two planes
+Threshold.dot_product_threshold: 0.8 # used in merge, check if two normals are parallel
+Threshold.offset_delta_factor: 6 # used in merge, check if two plane are close to each other
+
+# Graph-Cut RANSAC
+Threshold.confidence: 0.99
+Threshold.fps_limit: 30
+Threshold.spatial_coherence_weight: 0.6
+Threshold.minimum_inlier_ratio_for_sprt: 0.95
+
+Threshold.adaptive_number: 2
+Threshold.inlier_outlier_threshold: 0.02 # if adaptive_number > 0, ignore
+Threshold.sphere_radius: 0.02 # if adaptive_number > 0, ignore
+
+
+#-------------------------- viewer (plane) -----------------------
+Threshold.draw_dense_pointcloud: false # RGB-D mode, only for visualization of dense point cloud, it will de-activate the visualization of the plane
+Threshold.draw_plane_normal: false
+Threshold.square_size: 0.1 # the size of the plane patch for visualization
+Threshold.transparency_alpha: 0.7 # the transparency of the plane patch for visualization
+
+#-----------------------------------------------LSD/LBD----------------------------------------------------
+#-------------------------- tracking and local_mapping module (using line features) -----------------------
+Threshold.use_line_tracking: true

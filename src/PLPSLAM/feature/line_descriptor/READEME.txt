@@ -1,0 +1,16 @@
+// see VINS-PL: https://github.com/cnqiangfu/PL-VINS
+// FW: I simply put everything together
+
+// include:
+line_descriptor_custom.hpp
+descriptor_custom.hpp
+
+// src:
+binary_descriptor_custom.cpp
+binary_descriptor_matcher.cpp
+bitarray_custom.hpp
+bitops_custom.hpp
+draw_custom.cpp
+LSDDetector_custom.cpp
+precomp_custom.hpp
+types_custom.hpp

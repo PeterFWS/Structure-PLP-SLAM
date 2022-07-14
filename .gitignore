@@ -1,0 +1,10 @@
+/build/
+.vscode
+/evaluation_2021/
+/evaluation_2022/
+frame_trajectory.txt  
+keyframe_trajectory.txt  
+track_times.txt
+log.txt
+debug.txt
+*.msg
