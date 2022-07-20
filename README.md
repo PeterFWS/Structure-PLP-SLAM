@@ -10,7 +10,7 @@
 
 ## Related Papers:
 
-[1] F. Shu, et al. "Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras". 2022. (https://arxiv.org/abs/2207.06058)
+[1] F. Shu, et al. "Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras". 2022. (https://arxiv.org/abs/2207.06058) **updated arXiv v2 with supplementary materials.**
 
 [2] F. Shu, et al. "Visual SLAM with Graph-Cut Optimized Multi-Plane Reconstruction." International Symposium on Mixed and Augmented Reality (ISMAR, Poster). IEEE, 2021. (https://arxiv.org/abs/2108.04281)
 
@@ -70,15 +70,15 @@
 
 ### Dependencies:
 
-* For utilizing line segment (LSD + LBD): we develop the code using OpenCV 3.4.6, in which we restore the implementation of **LSD** because it was removed. Hence, if you use OpenCV 3+, you may need to restore the LSD code yourself. 
+* For utilizing line segment (LSD + LBD): we develop the code using OpenCV 3.4.6, in which we restored the implementation of **LSD** because it was removed. Hence, if you use OpenCV 3+, you may need to restore the LSD code yourself. 
 
-    However, OpenCV restore the LSD in commit **9b768727080b3279c244ad595115b1d5126d32ed** (01.10.2021). You are able to find this information under git-history of OpenCV.
+    However, later version of OpenCV restored the LSD in commit **9b768727080b3279c244ad595115b1d5126d32ed** (01.10.2021). You are able to find this information under git-history of OpenCV.
 
 * Other dependencies (g2o, Eigen3, Pangolin, DBoW2, Ubuntu 18.04) are in general similar to ORB-SLAM2.
 
 * We integrated **Graph-Cut RANSAC** C++ implementation to our project, which is under BSD license. See https://github.com/danini/graph-cut-ransac.
 
-* This project does not support using **ROS**, at least we haven't tested, for now.
+* This project does **not** support using **ROS** and **Docker**, at least we haven't tested, for now.
 
 * An additional plane detector:
 
