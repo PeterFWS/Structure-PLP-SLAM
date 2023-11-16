@@ -16,6 +16,10 @@
 
 [3] Y. Xie, et al. "PlaneRecNet: Multi-Task Learning with Cross-Task Consistency for Piece-Wise Plane Detection and Reconstruction from a Single RGB Image." British Machine Vision Conference (BMVC), 2021. (https://arxiv.org/abs/2110.11219)
 
+## Video
+[![Example Video](video/cover.png)](video/ICRA23_0006.mp4)
+
+
 ## The System Workflow: 
     
 <img src="image/slam-workflow.png" width="800">
@@ -72,7 +76,7 @@
 
 * For utilizing line segment (LSD + LBD): we develop the code using OpenCV 3.4.6, in which we restored the implementation of **LSD** because it was removed. Hence, if you use OpenCV 3+, you may need to restore the LSD code yourself. 
 
-    However, later version of OpenCV restored the LSD in commit **9b768727080b3279c244ad595115b1d5126d32ed** (01.10.2021). You are able to find this information under git-history of OpenCV.
+    **However, later version of OpenCV restored the LSD (e.g. OpenCV 3.4.16 should work).**
 
 * Other dependencies (g2o, Eigen3, Pangolin, DBoW2, Ubuntu 18.04) are in general similar to ORB-SLAM2.
 
@@ -87,6 +91,13 @@
     You could also segment images yourself, code please see: https://github.com/EryiXie/PlaneRecNet
 
 ### Build using CMake:
+
+**The structure-plp-slam code is based on a relatively old version of OpenVSLAM (from early 2021 I think).**
+
+**You should be able to find everything you need in this documentation:**
+https://stella-cv.readthedocs.io/en/0.3.9/example.html 
+
+Notice the version of this documentation is 0.3.9 which should be the corresponding one to my version of code. Do not use the latest documentation for the revised Stella-slam.
 
 ```
 mkdir build && cd build
@@ -127,7 +138,11 @@ Allowed options:
 ```
 
 ## Known Issues
-* If you have a crash right after running SLAM (due to some kind of corruption error), try to de-activate **BUILD_WITH_MARCH NATIVE** (in **ccmake .**).
+* If you have a crash right after running SLAM (e.g. a segmentation error), try to de-activate **BUILD_WITH_MARCH NATIVE** (in **ccmake .**). This is due to the wrong version of g2o.
+    
+    **You could find my version of g2o and DBoW in the link:** https://1drv.ms/u/s!Atj7rBR0X5zagZwcFs1oIqXeV5r4Cw?e=pbnNES
+
+* Visualization issue if you are running latest Ubuntu 20 or 22. As this codebase was developed with Ubuntu 18. When you run the code, the camera maybe not following the tracking path, see: https://github.com/PeterFWS/Structure-PLP-SLAM/issues/8
 
 
 ## Standard SLAM with Standard Datasets
