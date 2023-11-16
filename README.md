@@ -72,6 +72,15 @@
 
 ## Build with PangolinViewer (Default)
 
+```
+The structure-plp-slam code is based on a relatively old version of OpenVSLAM (from early 2021 I think).
+
+You should be able to find everything you need in this documentation:
+https://stella-cv.readthedocs.io/en/0.3.9/example.html 
+
+Notice the version of this documentation is 0.3.9 which should be the corresponding one to my version of code. Do not use the latest documentation for the revised Stella-slam.
+```
+
 ### Dependencies:
 
 * For utilizing line segment (LSD + LBD): we develop the code using OpenCV 3.4.6, in which we restored the implementation of **LSD** because it was removed. Hence, if you use OpenCV 3+, you may need to restore the LSD code yourself. 
@@ -91,13 +100,6 @@
     You could also segment images yourself, code please see: https://github.com/EryiXie/PlaneRecNet
 
 ### Build using CMake:
-
-**The structure-plp-slam code is based on a relatively old version of OpenVSLAM (from early 2021 I think).**
-
-**You should be able to find everything you need in this documentation:**
-https://stella-cv.readthedocs.io/en/0.3.9/example.html 
-
-Notice the version of this documentation is 0.3.9 which should be the corresponding one to my version of code. Do not use the latest documentation for the revised Stella-slam.
 
 ```
 mkdir build && cd build
