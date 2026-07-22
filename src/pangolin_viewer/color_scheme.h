@@ -26,7 +26,7 @@
 
 #include <array>
 #include <string>
-
+#include <stdexcept>
 namespace pangolin_viewer
 {
 

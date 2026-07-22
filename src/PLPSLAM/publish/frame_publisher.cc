@@ -28,6 +28,9 @@
 #include <spdlog/spdlog.h>
 #include <opencv2/imgproc.hpp>
 
+#include <sstream>
+#include <iomanip>
+
 namespace PLPSLAM
 {
     namespace publish

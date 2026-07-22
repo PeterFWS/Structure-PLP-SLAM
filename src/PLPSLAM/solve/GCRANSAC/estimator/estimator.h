@@ -36,6 +36,8 @@
 #include <vector>
 #include "PLPSLAM/solve/GCRANSAC/pearl/GCoptimization.h"
 
+#include <memory>
+
 namespace gcransac
 {
 	namespace estimator

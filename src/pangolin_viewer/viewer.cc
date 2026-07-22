@@ -35,6 +35,8 @@
 
 #include <spdlog/spdlog.h>
 
+#include <algorithm>
+
 namespace pangolin_viewer
 {
 

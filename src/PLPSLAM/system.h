@@ -36,6 +36,8 @@
 
 #include <yaml-cpp/yaml.h>
 
+#include <memory>
+
 namespace PLPSLAM
 {
 
