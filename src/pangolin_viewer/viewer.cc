@@ -276,7 +276,19 @@ namespace pangolin_viewer
     pangolin::OpenGlMatrix viewer::get_current_cam_pose()
     {
         const auto cam_pose_cw = map_publisher_->get_current_cam_pose();
-        const pangolin::OpenGlMatrix gl_cam_pose_wc(cam_pose_cw.inverse().eval());
+        // const pangolin::OpenGlMatrix gl_cam_pose_wc(cam_pose_cw.inverse().eval());
+        const Eigen::Matrix4d cam_pose_wc = cam_pose_cw.inverse();
+
+        pangolin::OpenGlMatrix gl_cam_pose_wc;
+        gl_cam_pose_wc.SetIdentity();
+
+        for (int row = 0; row < 4; ++row)
+        {
+            for (int col = 0; col < 4; ++col)
+            {
+                gl_cam_pose_wc.m[col * 4 + row] = cam_pose_wc(row, col);
+            }
+        }
         return gl_cam_pose_wc;
     }
 
