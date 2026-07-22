@@ -82,9 +82,9 @@ namespace PLPSLAM
             //      BlockSolver_6_3: indicates that the pose is 6-dimensional and the observation point is 3-dimensional. Used for BA in 3D SLAM
             //      BlockSolver_7_3: a scale is added on the basis of BlockSolver_6_3
             //      BlockSolver_3_2: indicates that the pose is 3-dimensional and the observation point is 2-dimensional
-            auto linear_solver = ::g2o::make_unique<::g2o::LinearSolverEigen<::g2o::BlockSolverX::PoseMatrixType>>(); //  pose->6DOF, landmark->3DOF
+            auto linear_solver = std::make_unique<::g2o::LinearSolverEigen<::g2o::BlockSolverX::PoseMatrixType>>(); //  pose->6DOF, landmark->3DOF
             // create a block solver, using the linear solver defined above
-            auto block_solver = ::g2o::make_unique<::g2o::BlockSolverX>(std::move(linear_solver));
+            auto block_solver = std::make_unique<::g2o::BlockSolverX>(std::move(linear_solver));
             // create the optimization algorithm, such as Gauss-Newton, Gradient-Descent , Levenberg-Marquardt:
             //      g2o::OptimizationAlgorithmGaussNewton
             //      g2o::OptimizationAlgorithmLevenberg
