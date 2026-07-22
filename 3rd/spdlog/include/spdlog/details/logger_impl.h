@@ -69,7 +69,8 @@ inline void spdlog::logger::log(source_loc source, level::level_enum lvl, const 
     {
         using details::fmt_helper::to_string_view;
         fmt::memory_buffer buf;
-        fmt::format_to(buf, fmt, args...);
+        // fmt::format_to(buf, fmt, args...);
+        fmt::format_to(std::back_inserter(buf), fmt, args...);
         details::log_msg log_msg(source, &name_, lvl, to_string_view(buf));
         sink_it_(log_msg);
     }
@@ -134,7 +135,8 @@ inline void spdlog::logger::log(source_loc source, level::level_enum lvl, const 
     {
         using details::fmt_helper::to_string_view;
         fmt::memory_buffer buf;
-        fmt::format_to(buf, "{}", msg);
+        // fmt::format_to(buf, "{}", msg);
+        fmt::format_to(std::back_inserter(buf), "{}", msg);
         details::log_msg log_msg(source, &name_, lvl, to_string_view(buf));
         sink_it_(log_msg);
     }
@@ -255,7 +257,8 @@ inline void spdlog::logger::log(source_loc source, level::level_enum lvl, const 
         // format to wmemory_buffer and convert to utf8
         using details::fmt_helper::to_string_view;
         fmt::wmemory_buffer wbuf;
-        fmt::format_to(wbuf, fmt, args...);
+        // fmt::format_to(wbuf, fmt, args...);
+        fmt::format_to(std::back_inserter(wbuf), fmt, args...);
         fmt::memory_buffer buf;
         wbuf_to_utf8buf(wbuf, buf);
         details::log_msg log_msg(source, &name_, lvl, to_string_view(buf));

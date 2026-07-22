@@ -160,7 +160,8 @@ struct formatter<spdlog::details::bytes_range<T>>
 
         if (put_positions)
         {
-            fmt::format_to(inserter, "{:<04X}: ", pos - 1);
+            // fmt::format_to(inserter, "{:<04X}: ", pos - 1);
+            fmt::format_to(std::back_inserter(inserter), "{:<04X}: ", pos - 1);
             return 7;
         }
         else

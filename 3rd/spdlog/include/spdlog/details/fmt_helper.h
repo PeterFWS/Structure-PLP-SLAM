@@ -7,6 +7,7 @@
 #include <chrono>
 #include <type_traits>
 #include "spdlog/fmt/fmt.h"
+#include <iterator>
 
 // Some fmt helpers to efficiently format and pad ints and strings
 namespace spdlog {
@@ -47,7 +48,8 @@ template<typename T>
 inline unsigned count_digits(T n)
 {
     using count_type = typename std::conditional<(sizeof(T) > sizeof(uint32_t)), uint64_t, uint32_t>::type;
-    return static_cast<unsigned>(fmt::internal::count_digits(static_cast<count_type>(n)));
+    // return static_cast<unsigned>(fmt::internal::count_digits(static_cast<count_type>(n)));
+    return static_cast<unsigned>(fmt::detail::count_digits(static_cast<count_type>(n)));
 }
 
 template<size_t Buffer_Size>
@@ -69,7 +71,8 @@ inline void pad2(int n, fmt::basic_memory_buffer<char, Buffer_Size> &dest)
     }
     else // negatives (unlikely, but just in case, let fmt deal with it)
     {
-        fmt::format_to(dest, "{:02}", n);
+        // fmt::format_to(dest, "{:02}", n);
+        fmt::format_to(std::back_inserter(dest), "{:02}", n);
     }
 }
 

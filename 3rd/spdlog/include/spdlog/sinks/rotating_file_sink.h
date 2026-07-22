@@ -49,11 +49,13 @@ public:
         {
             filename_t basename, ext;
             std::tie(basename, ext) = details::file_helper::split_by_extension(filename);
-            fmt::format_to(w, SPDLOG_FILENAME_T("{}.{}{}"), basename, index, ext);
+            // fmt::format_to(w, SPDLOG_FILENAME_T("{}.{}{}"), basename, index, ext);
+            fmt::format_to(std::back_inserter(w), SPDLOG_FILENAME_T("{}.{}{}"), basename, index, ext);
         }
         else
         {
-            fmt::format_to(w, SPDLOG_FILENAME_T("{}"), filename);
+            // fmt::format_to(w, SPDLOG_FILENAME_T("{}"), filename);
+            fmt::format_to(std::back_inserter(w), SPDLOG_FILENAME_T("{}"), filename);
         }
         return fmt::to_string(w);
     }
