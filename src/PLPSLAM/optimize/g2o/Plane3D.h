@@ -80,19 +80,19 @@ namespace PLPSLAM
                 }
 
                 // return  psi (azimuth)
-                static number_t azimuth(const ::g2o::Vector3 &v)
+                static ::g2o::number_t azimuth(const ::g2o::Vector3 &v)
                 {
                     return std::atan2(v(1), v(0)); // arctan(y/x)
                 }
 
                 // return phi (elevation)
-                static number_t elevation(const ::g2o::Vector3 &v)
+                static ::g2o::number_t elevation(const ::g2o::Vector3 &v)
                 {
                     return std::atan2(v(2), v.head<2>().norm()); // arctan(z/(sqrt(x^2 + y^2)))
                 }
 
                 // return normalized distance
-                number_t distance() const
+                ::g2o::number_t distance() const
                 {
                     return -_coeffs(3);
                 }
@@ -106,8 +106,8 @@ namespace PLPSLAM
                 // return rotation
                 static ::g2o::Matrix3 rotation(const ::g2o::Vector3 &v)
                 {
-                    number_t _azimuth = azimuth(v);
-                    number_t _elevation = elevation(v);
+                    ::g2o::number_t _azimuth = azimuth(v);
+                    ::g2o::number_t _elevation = elevation(v);
 
                     // !fix the error: Eigen::AngleAxis() not declared in the scope
                     // return (AngleAxis(_azimuth, Vector3::UnitZ()) * AngleAxis(-_elevation, Vector3::UnitY())).toRotationMatrix();
@@ -124,14 +124,14 @@ namespace PLPSLAM
                     // x = cos(phi)cos(psi)
                     // y = cos(phi)sin(psi)
                     // d = sin(phi)
-                    number_t _azimuth = v[0];
-                    number_t _elevation = v[1];
-                    number_t s = std::sin(_elevation), c = std::cos(_elevation);
+                    ::g2o::number_t _azimuth = v[0];
+                    ::g2o::number_t _elevation = v[1];
+                    ::g2o::number_t s = std::sin(_elevation), c = std::cos(_elevation);
                     ::g2o::Vector3 n(c * std::cos(_azimuth), c * std::sin(_azimuth), s);
 
                     // rotate the normal
                     ::g2o::Matrix3 R = rotation(normal());
-                    number_t d = distance() + v[2];
+                    ::g2o::number_t d = distance() + v[2];
                     _coeffs.head<3>() = R * n;
                     _coeffs(3) = -d;
                     normalize(_coeffs);
@@ -142,7 +142,7 @@ namespace PLPSLAM
                     // construct the rotation that would bring the plane normal in (1 0 0)
                     ::g2o::Matrix3 R = rotation(normal()).transpose();
                     ::g2o::Vector3 n = R * plane.normal();
-                    number_t d = distance() - plane.distance();
+                    ::g2o::number_t d = distance() - plane.distance();
                     return ::g2o::Vector3(azimuth(n), elevation(n), d);
                 }
 
@@ -175,7 +175,7 @@ namespace PLPSLAM
             protected:
                 static inline void normalize(::g2o::Vector4 &coeffs)
                 {
-                    number_t n = coeffs.head<3>().norm();
+                    ::g2o::number_t n = coeffs.head<3>().norm();
                     coeffs = coeffs * (1. / n);
 
                     // FW: why?

@@ -73,7 +73,7 @@ namespace PLPSLAM
                     }
 
                     Vec3_t pos_w_;
-                    number_t fx_, fy_, cx_, cy_;
+                    ::g2o::number_t fx_, fy_, cx_, cy_;
                 };
 
                 class stereo_perspective_pose_opt_edge : public ::g2o::BaseUnaryEdge<3, Vec3_t, shot_vertex>
@@ -109,7 +109,7 @@ namespace PLPSLAM
                     }
 
                     Vec3_t pos_w_;
-                    number_t fx_, fy_, cx_, cy_, focal_x_baseline_;
+                    ::g2o::number_t fx_, fy_, cx_, cy_, focal_x_baseline_;
                 };
 
             } // namespace se3

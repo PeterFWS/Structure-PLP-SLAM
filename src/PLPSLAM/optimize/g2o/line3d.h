@@ -36,9 +36,9 @@ namespace PLPSLAM
             // FW:
             //  (This file re-written from g2o library)
 
-            typedef Eigen::Matrix<number_t, 6, 1> Vector6;
-            typedef Eigen::Matrix<number_t, 6, 6> Matrix6;
-            typedef Eigen::Matrix<number_t, 6, 4> Matrix6x4;
+            typedef Eigen::Matrix<::g2o::number_t, 6, 1> Vector6;
+            typedef Eigen::Matrix<::g2o::number_t, 6, 6> Matrix6;
+            typedef Eigen::Matrix<::g2o::number_t, 6, 4> Matrix6x4;
 
             struct OrthonormalLine3D
             {
@@ -141,14 +141,14 @@ namespace PLPSLAM
                     ::g2o::Vector2 mags;
                     mags << line.d().norm(), line.w().norm();
 
-                    number_t wn = 1.0 / mags.norm();
+                    ::g2o::number_t wn = 1.0 / mags.norm();
                     ortho.W << mags.y() * wn, -mags.x() * wn, mags.x() * wn, mags.y() * wn;
 
-                    number_t mn = 1.0 / mags.y();
-                    number_t dn = 1.0 / mags.x();
+                    ::g2o::number_t mn = 1.0 / mags.y();
+                    ::g2o::number_t dn = 1.0 / mags.x();
                     ::g2o::Vector3 mdcross;
                     mdcross = line.w().cross(line.d());
-                    number_t mdcrossn = 1.0 / mdcross.norm();
+                    ::g2o::number_t mdcrossn = 1.0 / mdcross.norm();
                     ortho.U << line.w().x() * mn, line.d().x() * dn, mdcross.x() * mdcrossn,
                         line.w().y() * mn, line.d().y() * dn, mdcross.y() * mdcrossn,
                         line.w().z() * mn, line.d().z() * dn, mdcross.z() * mdcrossn;
@@ -158,7 +158,7 @@ namespace PLPSLAM
 
                 inline void normalize()
                 {
-                    number_t n = 1.0 / d().norm();
+                    ::g2o::number_t n = 1.0 / d().norm();
                     (*this) *= n;
                 }
 
@@ -212,17 +212,17 @@ namespace PLPSLAM
 
             Vector6 normalizeCartesianLine(const Vector6 &line);
 
-            static inline number_t mline_elevation(const number_t v[3])
+            static inline ::g2o::number_t mline_elevation(const ::g2o::number_t v[3])
             {
                 return std::atan2(v[2], sqrt(v[0] * v[0] + v[1] * v[1]));
             }
 
-            inline number_t getAzimuth(const ::g2o::Vector3 &direction)
+            inline ::g2o::number_t getAzimuth(const ::g2o::Vector3 &direction)
             {
                 return std::atan2(direction.y(), direction.x());
             }
 
-            inline number_t getElevation(const ::g2o::Vector3 &direction)
+            inline ::g2o::number_t getElevation(const ::g2o::Vector3 &direction)
             {
                 return std::atan2(direction.z(), direction.head<2>().norm());
             }

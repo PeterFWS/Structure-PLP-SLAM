@@ -53,20 +53,20 @@ namespace PLPSLAM
                     _estimate = Line3D(); // Plücker coordinates
                 }
 
-                virtual void oplusImpl(const number_t *update_)
+                virtual void oplusImpl(const ::g2o::number_t *update_)
                 {
                     Eigen::Map<const ::g2o::Vector4> update(update_);
                     _estimate.oplus(update); //  Orthonormal representation
                 }
 
-                virtual bool setEstimateDataImpl(const number_t *est)
+                virtual bool setEstimateDataImpl(const ::g2o::number_t *est)
                 {
                     Eigen::Map<const Vector6> _est(est);
                     _estimate = Line3D(_est);
                     return true;
                 }
 
-                virtual bool getEstimateData(number_t *est) const
+                virtual bool getEstimateData(::g2o::number_t *est) const
                 {
                     Eigen::Map<Vector6> _est(est);
                     _est = _estimate;

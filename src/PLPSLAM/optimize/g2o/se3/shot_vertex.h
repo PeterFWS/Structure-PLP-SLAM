@@ -55,7 +55,7 @@ namespace PLPSLAM
                         _estimate = ::g2o::SE3Quat();
                     }
 
-                    void oplusImpl(const number_t *update_) override
+                    void oplusImpl(const ::g2o::number_t *update_) override
                     {
                         Eigen::Map<const Vec6_t> update(update_);
                         setEstimate(::g2o::SE3Quat::exp(update) * estimate());

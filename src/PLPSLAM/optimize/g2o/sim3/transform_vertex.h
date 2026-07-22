@@ -54,9 +54,9 @@ namespace PLPSLAM
                         _estimate = ::g2o::Sim3();
                     }
 
-                    void oplusImpl(const number_t *update_) override
+                    void oplusImpl(const ::g2o::number_t *update_) override
                     {
-                        Eigen::Map<Vec7_t> update(const_cast<number_t *>(update_));
+                        Eigen::Map<Vec7_t> update(const_cast<::g2o::number_t *>(update_));
 
                         if (fix_scale_)
                         {

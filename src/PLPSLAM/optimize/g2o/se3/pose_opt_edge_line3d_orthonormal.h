@@ -95,7 +95,7 @@ namespace PLPSLAM
 
                     Vec6_t _pos_w; // Plücker coordinates of the 3D line
 
-                    number_t _fx, _fy, _cx, _cy;
+                    ::g2o::number_t _fx, _fy, _cx, _cy;
                     Mat33_t _K;
                 };
 

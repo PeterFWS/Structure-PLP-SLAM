@@ -45,7 +45,7 @@ namespace PLPSLAM
                 Vector6 cartesian;
                 cartesian.tail<3>() = d() / d().norm();
                 ::g2o::Matrix3 W = -_skew(d());
-                number_t damping = ::g2o::cst(1e-9);
+                ::g2o::number_t damping = ::g2o::cst(1e-9);
                 ::g2o::Matrix3 A = W.transpose() * W + (::g2o::Matrix3::Identity() * damping);
                 cartesian.head<3>() = A.ldlt().solve(W.transpose() * w());
                 return cartesian;
