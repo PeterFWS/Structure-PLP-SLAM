@@ -3,6 +3,9 @@
 # Pangolin
 find_package(Pangolin REQUIRED)
 
+message(STATUS "Pangolin_INCLUDE_DIRS=${Pangolin_INCLUDE_DIRS}")
+message(STATUS "Pangolin_LIBRARIES=${Pangolin_LIBRARIES}")
+
 # ----- Configure PangolinViewer library -----
 add_library(pangolin_viewer
         SHARED
@@ -17,13 +20,13 @@ set_target_properties(pangolin_viewer PROPERTIES
 
 target_include_directories(pangolin_viewer
         PUBLIC
-        ${Pangolin_INCLUDE_DIR})
+        ${Pangolin_INCLUDE_DIRS})
 
 target_link_libraries(pangolin_viewer
         PUBLIC
         ${PROJECT_NAME}
         opencv_highgui
-        pangolin)
+        ${Pangolin_LIBRARIES})
 
 # ----- Install configuration -----
 set(INSTALL_PANGOLIN_VIEWER OFF CACHE BOOL "Install PangolinViewer library")
