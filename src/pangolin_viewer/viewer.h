@@ -31,7 +31,7 @@
 #include <memory>
 #include <mutex>
 
-#include <GL/glew.h>
+// #include <GL/glew.h>
 #include <pangolin/pangolin.h>
 
 #include "PLPSLAM/type.h"
