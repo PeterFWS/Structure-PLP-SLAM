@@ -163,7 +163,8 @@ namespace PLPSLAM
 
             // The solver type defines the method to solve the matrix inverse and the structure of the sparse matrix.
             // define solver type, such as linear solver, here use Csparse library as the backend solver
-            auto linear_solver = std::make_unique<::g2o::LinearSolverCSparse<::g2o::BlockSolver_6_3::PoseMatrixType>>();
+            // auto linear_solver = std::make_unique<::g2o::LinearSolverCSparse<::g2o::BlockSolver_6_3::PoseMatrixType>>();
+            auto linear_solver = std::make_unique<::g2o::LinearSolverEigen<::g2o::BlockSolver_6_3::PoseMatrixType>>();
             // create a solver
             auto block_solver = std::make_unique<::g2o::BlockSolver_6_3>(std::move(linear_solver));
             // create the optimization algorithm, such as Gauss-Newton, Gradient-Descent , Levenberg-Marquardt

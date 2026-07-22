@@ -35,6 +35,7 @@
 #include <g2o/core/sparse_optimizer.h>
 #include <g2o/core/robust_kernel_impl.h>
 #include <g2o/solvers/csparse/linear_solver_csparse.h>
+#include <g2o/solvers/eigen/linear_solver_eigen.h>
 #include <g2o/core/optimization_algorithm_levenberg.h>
 
 #include "PLPSLAM/data/landmark_line.h"
@@ -57,7 +58,8 @@ namespace PLPSLAM
         {
             // [1] build optimizer
 
-            auto linear_solver = std::make_unique<::g2o::LinearSolverCSparse<::g2o::BlockSolver_7_3::PoseMatrixType>>();
+            // auto linear_solver = std::make_unique<::g2o::LinearSolverCSparse<::g2o::BlockSolver_7_3::PoseMatrixType>>();
+            auto linear_solver = std::make_unique<::g2o::LinearSolverEigen<::g2o::BlockSolver_7_3::PoseMatrixType>>();
             auto block_solver = std::make_unique<::g2o::BlockSolver_7_3>(std::move(linear_solver));
             auto algorithm = new ::g2o::OptimizationAlgorithmLevenberg(std::move(block_solver));
 
