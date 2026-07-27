@@ -1,13 +1,5 @@
 # Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras
 
-### License Issue
-
-* Notice that this work is based on the original OpenVSLAM (renamed now as stella-vslam), which is a derivative work of ORB-SLAM2 without any modification to core algorithms. It was declared in conflict with ORB-SLAM2 (see: https://github.com/stella-cv/stella_vslam/issues/249).
-
-* For the courtesy of ORB-SLAM2, the granted license of this project is **GNU General Public License v3.0**. For commercial purposes of this project, please contact department Augmented Vision (https://www.dfki.de/en/web/research/research-departments/augmented-vision), DFKI (German Research Center for Artificial Intelligence), Germany.
-
-* If you have any **technical questions** regarding to the implementation, please kindly leave an issue.
-
 ## Related Papers:
 
 [1] F. Shu, et al. "Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras". IEEE International Conference on Robotics and Automation (ICRA), 2023. (https://arxiv.org/abs/2207.06058) **updated arXiv v3 with supplementary materials.**
@@ -17,81 +9,86 @@
 [3] Y. Xie, et al. "PlaneRecNet: Multi-Task Learning with Cross-Task Consistency for Piece-Wise Plane Detection and Reconstruction from a Single RGB Image." British Machine Vision Conference (BMVC), 2021. (https://arxiv.org/abs/2110.11219)
 
 ## Video
-[![Example Video](video/cover.png)](video/ICRA23_0006.mp4)
+
+<p align="center">
+  <a href="video/ICRA23_0006.mp4">
+    <img src="video/cover.png" width="800" alt="Structure PLP-SLAM Demo">
+  </a>
+</p>
+
+<p align="center">
+Click the image above to download and watch the ICRA 2023 demonstration.
+</p>
 
 
 ## The System Workflow: 
-    
-<img src="image/slam-workflow.png" width="800">
 
-## Qualitative Illustration:
+<p align="center">
+  <img src="image/slam-workflow.png" width="800">
+</p>
 
-### Monocular: 
+## Qualitative Results
 
-* fr3_structure_texture_far (dataset TUM RGB-D)
+### Monocular
 
-     <img src="image/str_tex_far.png" width="400">
+<p align="center">
+  <img src="image/str_tex_far.png" width="48%">
+  <img src="image/living_room_0.png" width="48%">
+</p>
 
-* living_room_traj0 and living_room_traj2 (dataset ICL-NUIM)
+<p align="center">
+  <img src="image/mono.png" width="48%">
+  <img src="image/kitti_mono.png" width="48%">
+</p>
 
-    <img src="image/living_room_0.png" width="400">
-    <img src="image/living_room_2.png" width="373">
+*TUM RGB-D • ICL-NUIM • EuRoC MAV • KITTI*
 
-* MH_04_difficult (dataset EuRoC MAV)
+---
 
-    <img src="image/mono.png" width="500">
+### RGB-D
 
-* Sequence_00 (data_odometry_gray, dataset KITTI)
+<p align="center">
+  <img src="image/fr2_pioneer.png" width="48%">
+  <img src="image/traj0.png" width="48%">
+</p>
 
-    <img src="image/kitti_mono.png" width="500">
+*TUM RGB-D • ICL-NUIM*
 
-### RGB-D:
-* fr2_pioneer_slam (dataset TUM RGB-D)
+---
 
-    <img src="image/fr2_pioneer.png" width="500">
+### Stereo
 
-* office_room_traj0 (dataset ICL-NUIM)
+<p align="center">
+  <img src="image/Stereo.png" width="48%">
+  <img src="image/V1_03_difficult_full.png" width="48%">
+</p>
 
-    <img src="image/traj0.png" width="500">
-
-### Stereo:
-* MH_04_difficult (dataset EuRoC MAV)
-
-    <img src="image/Stereo.png" width="500">
-
-* V1_03_difficult (dataset EuRoC MAV)
-
-    <img src="image/V1_03_difficult_full.png" width="500">
-
-
-## Some Remarks
-
-* Point-Line SLAM is generalized. It can be conducted on all kind of data image sequences.
-* For running Planar SLAM, segmentation needs to be done beforehand (see details in below).
-* ORB vocabulary is already attached to this repository, see: ./orb_vocab/
+*EuRoC MAV*
 
 ## Build with PangolinViewer (Default)
 
 ### Documentation
 
-The structure-plp-slam code is based on a relatively old version of OpenVSLAM (from early 2021 I think).
+The structure-plp-slam code is based on a relatively old version of OpenVSLAM (early 2021).
 
-You should be able to find everything you need in this documentation:
+See the corresponding v0.3.9 documentation:
 
     https://stella-cv.readthedocs.io/en/0.3.9/example.html 
 
+### Remarks
 
-Notice the version of this documentation is 0.3.9 which should be the corresponding one to my version of code. Do not use the latest documentation for the revised Stella-slam.
+* Point-Line SLAM is generalized. Suppose it can be conducted on all kind of data image sequences.
+* For running Planar SLAM, segmentation needs to be done beforehand (see details in below).
+* ORB vocabulary is already attached to this repository, see: ./orb_vocab/
 
 ### Dependencies:
 
-* For utilizing line segment (LSD + LBD): we develop the code using OpenCV 3.4.6, in which we restored the implementation of **LSD** because it was removed. Hence, if you use OpenCV 3+, you may need to restore the LSD code yourself. 
-
-    **However, later version of OpenCV restored the LSD (e.g. OpenCV 3.4.16 should work).**
-
-* Other dependencies (g2o, Eigen3, Pangolin, DBoW2, Ubuntu 18.04) are in general similar to ORB-SLAM2.
-
-* We integrated **Graph-Cut RANSAC** C++ implementation to our project, which is under BSD license. See https://github.com/danini/graph-cut-ransac.
+* **Ubuntu 24.04** was tested.
+* **OpenCV**: version 3.4.16 was tested, for utilizing line segment (LSD + LBD).
+* **g2o**: can install the latest version, the recent commit (July 12, 2026) was tested.
+* **Eigen3**: version 3.4.1 was tested, must be version 3.
+* **DBoW2**: please download the version from ondrive (https://1drv.ms/u/s!Atj7rBR0X5zagZwcFs1oIqXeV5r4Cw?e=pbnNES), latest version from github is not tested.
+* **Graph-Cut RANSAC**: its C++ implementation was integrated into the SLAM system, under BSD license. See https://github.com/danini/graph-cut-ransac.
 
 * This project does **not** support using **ROS** and **Docker**, at least we haven't tested, for now.
 
@@ -142,14 +139,15 @@ Allowed options:
 ```
 
 ## Known Issues
-* If you have a crash right after running SLAM (e.g. a segmentation error), try to de-activate **BUILD_WITH_MARCH NATIVE** (in **ccmake .**). This is due to the wrong version of g2o.
-    
-    **You could find my version of g2o and DBoW in the link:** https://1drv.ms/u/s!Atj7rBR0X5zagZwcFs1oIqXeV5r4Cw?e=pbnNES
+* System crash right after initializing SLAM (a segmentation error due to g2o CSparse solver) has been fixed.
 
-* Visualization issue if you are running latest Ubuntu 20 or 22. As this codebase was developed with Ubuntu 18. When you run the code, the camera maybe not following the tracking path, see: https://github.com/PeterFWS/Structure-PLP-SLAM/issues/8
+* Visualization issue (https://github.com/PeterFWS/Structure-PLP-SLAM/issues/8) that the camera is not following the right tracking path, appears to be resolved, recent tested on Ubuntu24.04.
 
 
-## Standard SLAM with Standard Datasets
+## Run Standard SLAM with Standard Datasets
+
+<details>
+<summary><b>TUM RGB-D / KITTI / EuRoc MAV</b> (Monocular / RGB-D / Stereo Examples)</summary>
 
 ### (1) TUM-RGBD dataset (monocular/RGB-D):
 
@@ -177,7 +175,13 @@ Allowed options:
 -d /data/EuRoC_MAV/MH_01_easy/mav0 \
 -c ./example/euroc/EuRoC_mono.yaml
 ```
+</details>
+
 ## Run Point-Line SLAM
+
+<details>
+<summary><b>TUM RGB-D / KITTI / EuRoc MAV</b> (Monocular / RGB-D / Stereo Examples)</summary>
+
 ### (1) TUM RGB-D (monocular/RGB-D)
 
 ```
@@ -214,7 +218,12 @@ Allowed options:
 -c ./example/kitti/KITTI_mono_00-02.yaml
 ```
 
+</details>
+
 ## Run Re-localization (Map-based Image Localization) using Pre-built Map
+
+<details>
+<summary><b>TUM RGB-D</b> (Monocular / RGB-D Examples)</summary>
 
 First, pre-build a map using (monocular or RGB-D) SLAM:
 ```
@@ -234,9 +243,16 @@ Second, run the (monocular) image localization mode, notice that give the path t
 --map-db freiburg3_long_office_household.msg
 ```
 
+</details>
+
+<p align="center">
 <img src="image/relocalization.png" width="500">
+</p>
 
 ## Run Point-Plane SLAM (+ Line if Activated, see: planar_mapping_parameters.yaml)
+
+<details>
+<summary><b>TUM RGB-D / KITTI / EuRoc MAV</b> (Monocular / RGB-D / Stereo Examples)</summary>
 
 * We provide instance planar segmentation masks and *.txt file, which can be **download** here (OneDrive shared): 
     
@@ -311,14 +327,17 @@ Only V1 and V2 image sequences, due to segmentation CNN failure on factory data 
 -c ./example/euroc/EuRoC_stereo.yaml
 ```
 
+</details>
+
 ## Activate Depth-based Dense Reconstruction
 
 It can be easily activated in **planar_mapping_parameters.yaml** -> **Threshold.draw_dense_pointcloud: true**. 
 
 This is a toy demo (RGB-D only).
 
+<p align="center">
 <img src="image/result_dense.png" width="500">
-
+</p>
 
 ## Evaluation with EVO tool (https://github.com/MichaelGrupp/evo)
 
@@ -340,3 +359,11 @@ gdb ./build/run_slam_planeSeg
 
 run -v ./orb_vocab/orb_vocab.dbow2 -d /data/TUM_RGBD/rgbd_dataset_freiburg3_structure_texture_far -c ./example/tum_rgbd/TUM_RGBD_rgbd_3.yaml
 ```
+
+### License
+
+* Notice that this work is based on the original OpenVSLAM (renamed now as stella-vslam), which is a derivative work of ORB-SLAM2 without any modification to core algorithms. It was declared in conflict with ORB-SLAM2 (see: https://github.com/stella-cv/stella_vslam/issues/249).
+
+* For the courtesy of ORB-SLAM2, the granted license of this project is **GNU General Public License v3.0**. For commercial purposes of this project, please contact department Augmented Vision (https://www.dfki.de/en/web/research/research-departments/augmented-vision), DFKI (German Research Center for Artificial Intelligence), Germany.
+
+* If you have any **technical questions** regarding to the implementation, please kindly leave an issue.
